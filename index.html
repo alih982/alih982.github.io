@@ -13,16 +13,14 @@
 
   :root {
     --bg: #f8f6f1;
-    --bg-warm: #fdfbf6;
     --surface: #ffffff;
     --text: #1c1a17;
     --text-soft: #6f6a62;
     --text-faint: #b0aba2;
     --line: #ece7dd;
     --accent: #5b52d6;
-    --accent-warm: #7a6ee8;
     --accent-soft: #f0eeff;
-    --shadow-xs: 0 1px 3px rgba(28, 26, 23, 0.03);
+    --whatsapp: #25d366;
     --shadow-sm: 0 2px 10px -3px rgba(28, 26, 23, 0.05);
     --shadow-md: 0 18px 44px -22px rgba(28, 26, 23, 0.12);
     --shadow-lg: 0 36px 80px -36px rgba(28, 26, 23, 0.18);
@@ -43,7 +41,6 @@
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: direction 0.3s;
   }
 
   html[lang="en"] body { font-family: 'Inter', 'Vazirmatn', system-ui, sans-serif; }
@@ -62,7 +59,6 @@
 
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
-
   button { font-family: inherit; }
 
   .container {
@@ -71,11 +67,11 @@
     padding: 0 28px;
   }
 
-  /* ---------- Language toggle ---------- */
+  /* ---------- Language toggle (همیشه بالا راست) ---------- */
   .lang-toggle {
     position: fixed;
     top: 26px;
-    inset-inline-end: 26px;
+    right: 26px;
     z-index: 100;
     padding: 10px 22px;
     border-radius: 999px;
@@ -97,6 +93,42 @@
     color: var(--accent);
   }
   .lang-toggle:active { transform: translateY(0) scale(0.98); }
+
+  /* ---------- دکمه شناور واتساپ ---------- */
+  .fab {
+    position: fixed;
+    bottom: 26px;
+    right: 26px;
+    z-index: 99;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 22px 14px 16px;
+    background: var(--whatsapp);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 16px 40px -12px rgba(37, 211, 102, 0.55);
+    transition: all 0.4s var(--ease);
+  }
+  .fab svg { width: 22px; height: 22px; flex-shrink: 0; }
+  .fab-label {
+    max-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.5s var(--ease);
+  }
+  .fab:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 22px 50px -14px rgba(37, 211, 102, 0.65);
+  }
+  .fab:hover .fab-label {
+    max-width: 200px;
+    opacity: 1;
+    margin-inline-start: 2px;
+  }
 
   /* ---------- هدر ---------- */
   header {
@@ -159,7 +191,7 @@
   header p.subtitle {
     font-size: 1.08rem;
     color: var(--text-soft);
-    max-width: 480px;
+    max-width: 520px;
     margin: 0 auto 48px;
     font-weight: 300;
     line-height: 1.95;
@@ -200,7 +232,6 @@
     transform: translateY(-3px);
     box-shadow: 0 20px 40px -16px rgba(91, 82, 214, 0.65);
   }
-  .btn-primary:active { transform: translateY(-1px); }
 
   .btn-outline {
     background: var(--surface);
@@ -212,7 +243,6 @@
     box-shadow: var(--shadow-md);
     color: var(--accent);
   }
-  .btn-outline:active { transform: translateY(-1px); }
 
   .btn:focus-visible {
     outline: 2px solid var(--accent);
@@ -359,11 +389,59 @@
     letter-spacing: 0.03em;
   }
 
+  /* ---------- فرایند کار ---------- */
+  .process {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .step {
+    background: var(--surface);
+    padding: 36px 30px;
+    border-radius: 30px;
+    position: relative;
+    transition: all 0.5s var(--ease);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .step:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #5b52d6, #7a6ee8);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 20px -8px rgba(91, 82, 214, 0.5);
+  }
+
+  .step h3 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin-bottom: 9px;
+  }
+
+  .step p {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    line-height: 1.95;
+  }
+
   /* ---------- تماس ---------- */
   .contact-box {
     background: var(--surface);
     border-radius: 44px;
-    padding: 84px 40px;
+    padding: 90px 40px;
     text-align: center;
     box-shadow: var(--shadow-md);
     position: relative;
@@ -375,36 +453,45 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at 15% 15%, rgba(122, 110, 232, 0.06), transparent 40%),
-      radial-gradient(circle at 85% 85%, rgba(255, 178, 132, 0.06), transparent 40%);
+      radial-gradient(circle at 15% 15%, rgba(122, 110, 232, 0.07), transparent 40%),
+      radial-gradient(circle at 85% 85%, rgba(255, 178, 132, 0.07), transparent 40%);
     pointer-events: none;
   }
 
   .contact-box > * { position: relative; }
 
   .contact-box h2 {
-    font-size: clamp(1.6rem, 3.2vw, 2.05rem);
+    font-size: clamp(1.7rem, 3.5vw, 2.2rem);
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
     letter-spacing: -0.025em;
+    line-height: 1.4;
   }
   html[lang="fa"] .contact-box h2 { letter-spacing: -0.01em; }
 
   .contact-box p.lead {
     color: var(--text-soft);
-    margin-bottom: 40px;
+    margin-bottom: 42px;
     font-weight: 300;
-    max-width: 440px;
+    max-width: 460px;
     margin-inline: auto;
-    font-size: 1.02rem;
+    font-size: 1.05rem;
+    line-height: 1.95;
   }
 
   .contact-box .btns { gap: 12px; }
 
+  .contact-note {
+    margin-top: 34px;
+    font-size: 0.83rem;
+    color: var(--text-faint);
+    font-weight: 400;
+  }
+
   /* ---------- فوتر ---------- */
   footer {
     text-align: center;
-    padding: 60px 20px;
+    padding: 60px 20px 100px;
     color: var(--text-faint);
     font-size: 0.8rem;
     margin-top: 30px;
@@ -421,7 +508,14 @@
     .btn { padding: 14px 24px; font-size: 0.9rem; }
     .service { padding: 30px 24px; border-radius: 26px; }
     .work { border-radius: 28px; }
-    .lang-toggle { top: 18px; inset-inline-end: 18px; padding: 9px 16px; }
+    .step { padding: 30px 24px; border-radius: 26px; }
+    .lang-toggle { top: 18px; right: 18px; padding: 9px 16px; }
+    .fab {
+      bottom: 20px;
+      right: 20px;
+      padding: 14px 18px;
+    }
+    .fab-label { max-width: 0 !important; opacity: 0 !important; }
     .contact-box .btns { flex-direction: column; align-items: stretch; }
     .contact-box .btn { width: 100%; }
   }
@@ -433,8 +527,14 @@
 </head>
 <body>
 
-<!-- Language toggle -->
+<!-- Language toggle (همیشه بالا راست) -->
 <button class="lang-toggle" id="langBtn" aria-label="Switch language">FA</button>
+
+<!-- Floating WhatsApp button -->
+<a href="https://wa.me/989351914839" class="fab" aria-label="Order on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="fab-label" data-fa="سفارش در واتساپ" data-en="Order on WhatsApp">Order on WhatsApp</span>
+</a>
 
 <!-- Header -->
 <header>
@@ -446,8 +546,8 @@
     <h1>
       <span data-fa="سلام، من <span class='accent'>علی حاتمی</span> هستم" data-en="Hi, I'm <span class='accent'>Ali Hatami</span>">Hi, I'm <span class="accent">Ali Hatami</span></span>
     </h1>
-    <p class="subtitle" data-fa="طراح سایت و لندینگ‌پیج — متخصص وردپرس و المنتور" data-en="Web Designer & Landing Page Specialist — WordPress & Elementor Expert">
-      Web Designer & Landing Page Specialist — WordPress & Elementor Expert
+    <p class="subtitle" data-fa="سایتت رو جوری می‌سازم که مشتری‌ها دوستش داشته باشن — سریع، تمیز و آماده فروش" data-en="I build websites your customers will love — fast, clean, and ready to sell">
+      I build websites your customers will love — fast, clean, and ready to sell
     </p>
     <div class="btns">
       <a href="#works" class="btn btn-primary" data-fa="مشاهده نمونه‌کارها" data-en="View Portfolio">View Portfolio</a>
@@ -544,17 +644,46 @@
   </div>
 </section>
 
+<!-- Process -->
+<section id="process">
+  <div class="container">
+    <div class="section-head">
+      <span class="label" data-fa="فرایند کار" data-en="Process">Process</span>
+      <h2 data-fa="چطور با هم کار می‌کنیم" data-en="How We'll Work Together">How We'll Work Together</h2>
+    </div>
+    <div class="process">
+      <div class="step">
+        <div class="step-num">۱</div>
+        <h3 data-fa="گفتگو" data-en="Talk">Talk</h3>
+        <p data-fa="یه پیام بدی، نیازت رو می‌شنوم و راهنمایی‌ات می‌کنم. رایگان و بدون تعهد." data-en="Send a message. I'll listen and guide you — free, with no obligation.">Send a message. I'll listen and guide you — free, with no obligation.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">۲</div>
+        <h3 data-fa="طراحی و ساخت" data-en="Design & Build">Design & Build</h3>
+        <p data-fa="طرح رو می‌سازم، نظرت رو می‌گیرم و تا رضایت کامل ادامه می‌دیم." data-en="I design and build it, share previews, and refine until you're happy.">I design and build it, share previews, and refine until you're happy.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">۳</div>
+        <h3 data-fa="تحویل و پشتیبانی" data-en="Launch & Support">Launch & Support</h3>
+        <p data-fa="سایتت آنلاین می‌شه و بعد از تحویل هم کنارت می‌مونم." data-en="Your site goes live — and I stay by your side after launch.">Your site goes live — and I stay by your side after launch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Contact -->
 <section id="contact">
   <div class="container">
     <div class="contact-box">
-      <h2 data-fa="بیا با هم کار کنیم" data-en="Let's Work Together">Let's Work Together</h2>
-      <p class="lead" data-fa="آماده‌ام پروژه‌ات رو با کیفیت و در زمان مقرر تحویل بدم" data-en="I'm ready to deliver your project with quality and on time">I'm ready to deliver your project with quality and on time</p>
+      <h2 data-fa="آماده‌ای سایتت رو شروع کنیم؟" data-en="Ready to start your website?">Ready to start your website?</h2>
+      <p class="lead" data-fa="فقط یه پیام فاصله داری. همین حالا شروع کنیم — من سریع جواب می‌دم." data-en="You're just one message away. Let's start right now — I reply fast.">
+        You're just one message away. Let's start right now — I reply fast.
+      </p>
       <div class="btns">
 
         <a href="https://wa.me/989351914839" class="btn btn-primary">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          <span data-fa="واتساپ" data-en="WhatsApp">WhatsApp</span>
+          <span data-fa="سفارش در واتساپ" data-en="Order on WhatsApp">Order on WhatsApp</span>
         </a>
 
         <a href="https://t.me/Aliatamii" class="btn btn-outline">
@@ -562,17 +691,20 @@
           <span data-fa="تلگرام" data-en="Telegram">Telegram</span>
         </a>
 
-        <a href="mailto:ahatamiali220@gmail.com" class="btn btn-outline">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/></svg>
-          <span data-fa="ایمیل" data-en="Email">Email</span>
-        </a>
-
         <a href="tel:+989351914839" class="btn btn-outline">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <span data-fa="تماس مستقیم" data-en="Direct Call">Direct Call</span>
         </a>
 
+        <a href="mailto:ahatamiali220@gmail.com" class="btn btn-outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/></svg>
+          <span data-fa="ایمیل" data-en="Email">Email</span>
+        </a>
+
       </div>
+      <p class="contact-note">
+        <span data-fa="معمولاً در کمتر از یک ساعت پاسخ می‌دم ✨" data-en="I usually reply within an hour ✨">I usually reply within an hour ✨</span>
+      </p>
     </div>
   </div>
 </section>
