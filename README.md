@@ -77,9 +77,8 @@
 
 | راه ارتباطی | آدرس |
 |---|---|
-| 📧 **ایمیل** | `YOUR_EMAIL@gmail.com` |
-| 💬 **واتساپ** | [تماس مستقیم](https://wa.me/98YOURNUMBER) |
-| 📱 **تلگرام** | [@YOURUSERNAME](https://t.me/YOURUSERNAME) |
+| 📧 **ایمیل** | `ahatamiali220@gmail.com` |
+| 📱 **تلگرام** | [@Aliatamii](https://t.me/Aliatamii) |
 | 🌐 **وب‌سایت** | [alih982.github.io](https://alih982.github.io) |
 
 </div>
