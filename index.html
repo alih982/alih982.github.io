@@ -2,48 +2,90 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Ali Hatami | Web Designer & Landing Page Specialist</title>
-<meta name="description" content="Web Designer & Landing Page Specialist — WordPress & Elementor Expert">
+<meta name="description" content="Web Designer & Landing Page Specialist — WordPress & Elementor Expert. Clean, fast, conversion-focused websites.">
+<meta name="theme-color" content="#f8f6f1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --bg: #f8f6f1;
-    --surface: #ffffff;
-    --text: #1c1a17;
-    --text-soft: #6f6a62;
-    --text-faint: #b0aba2;
-    --line: #ece7dd;
-    --accent: #5b52d6;
-    --accent-soft: #f0eeff;
-    --whatsapp: #25d366;
-    --shadow-sm: 0 2px 10px -3px rgba(28, 26, 23, 0.05);
-    --shadow-md: 0 18px 44px -22px rgba(28, 26, 23, 0.12);
-    --shadow-lg: 0 36px 80px -36px rgba(28, 26, 23, 0.18);
-    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  /* ============ Reset & Tokens ============ */
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
-  html { scroll-behavior: smooth; }
+  :root {
+    /* Colors */
+    --bg: #f8f6f1;
+    --surface: #ffffff;
+    --surface-soft: #fdfbf7;
+    --text: #1c1a17;
+    --text-soft: #6f6a62;
+    --text-faint: #a8a39a;
+    --line: #ece7dd;
+
+    --accent: #5b52d6;
+    --accent-hover: #4a41c9;
+    --accent-soft: #f0eeff;
+    --accent-glow: rgba(91, 82, 214, 0.28);
+
+    --success: #22c55e;
+    --success-soft: rgba(34, 197, 94, 0.14);
+    --whatsapp: #25d366;
+    --whatsapp-dark: #1ebe5b;
+
+    /* Radius scale */
+    --r-sm: 12px;
+    --r-md: 20px;
+    --r-lg: 28px;
+    --r-xl: 36px;
+    --r-pill: 999px;
+
+    /* Shadow scale */
+    --sh-xs: 0 1px 2px rgba(28, 26, 23, 0.04);
+    --sh-sm: 0 2px 10px -3px rgba(28, 26, 23, 0.06);
+    --sh-md: 0 12px 32px -14px rgba(28, 26, 23, 0.12);
+    --sh-lg: 0 28px 60px -24px rgba(28, 26, 23, 0.16);
+    --sh-xl: 0 40px 90px -32px rgba(28, 26, 23, 0.20);
+
+    /* Motion */
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Layout */
+    --container: 940px;
+    --gutter: clamp(20px, 4vw, 32px);
+    --section-y: clamp(72px, 11vw, 128px);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+    -webkit-text-size-adjust: 100%;
+  }
 
   body {
-    font-family: 'Vazirmatn', 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', 'Vazirmatn', system-ui, -apple-system, sans-serif;
     background: var(--bg);
     background-image:
-      radial-gradient(circle at 12% 0%, rgba(122, 110, 232, 0.07), transparent 45%),
-      radial-gradient(circle at 88% 100%, rgba(255, 178, 132, 0.07), transparent 45%);
+      radial-gradient(circle at 8% -10%, rgba(122, 110, 232, 0.10), transparent 42%),
+      radial-gradient(circle at 92% 110%, rgba(255, 168, 120, 0.09), transparent 42%);
     background-attachment: fixed;
     color: var(--text);
-    line-height: 1.85;
+    font-size: 16px;
+    line-height: 1.75;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
 
-  html[lang="en"] body { font-family: 'Inter', 'Vazirmatn', system-ui, sans-serif; }
   html[lang="fa"] body { font-family: 'Vazirmatn', 'Inter', system-ui, sans-serif; }
 
   ::selection { background: var(--accent-soft); color: var(--accent); }
@@ -52,49 +94,82 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
     background: #ddd6cc;
-    border-radius: 999px;
+    border-radius: var(--r-pill);
     border: 3px solid var(--bg);
   }
   ::-webkit-scrollbar-thumb:hover { background: #c9c1b5; }
 
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; display: block; }
-  button { font-family: inherit; }
+  button { font-family: inherit; font-size: inherit; color: inherit; }
 
-  .container {
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 0 28px;
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 
-  /* ---------- Language toggle (همیشه بالا راست) ---------- */
+  /* ============ Layout ============ */
+  .container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  /* ============ Fixed Header ============ */
+  .brand {
+    position: fixed;
+    top: 22px;
+    left: 26px;
+    z-index: 100;
+    padding: 10px 20px;
+    border-radius: var(--r-pill);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    box-shadow: var(--sh-sm);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    color: var(--text);
+    transition: all 0.35s var(--ease);
+  }
+  .brand:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sh-md);
+    color: var(--accent);
+  }
+
   .lang-toggle {
     position: fixed;
-    top: 26px;
+    top: 22px;
     right: 26px;
     z-index: 100;
-    padding: 10px 22px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: var(--shadow-sm);
+    padding: 10px 20px;
+    border-radius: var(--r-pill);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    box-shadow: var(--sh-sm);
     font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     color: var(--text);
     border: none;
     cursor: pointer;
     transition: all 0.35s var(--ease);
+    min-width: 56px;
+    text-align: center;
   }
   .lang-toggle:hover {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+    box-shadow: var(--sh-md);
     color: var(--accent);
   }
-  .lang-toggle:active { transform: translateY(0) scale(0.98); }
+  .lang-toggle:active { transform: translateY(0) scale(0.96); }
 
-  /* ---------- دکمه شناور واتساپ ---------- */
+  /* ============ FAB - WhatsApp ============ */
   .fab {
     position: fixed;
     bottom: 26px;
@@ -102,15 +177,16 @@
     z-index: 99;
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    padding: 14px 22px 14px 16px;
+    gap: 10px;
+    padding: 14px 20px 14px 16px;
     background: var(--whatsapp);
     color: #fff;
-    border-radius: 999px;
+    border-radius: var(--r-pill);
     font-size: 0.9rem;
     font-weight: 500;
-    box-shadow: 0 16px 40px -12px rgba(37, 211, 102, 0.55);
+    box-shadow: 0 18px 40px -14px rgba(37, 211, 102, 0.55);
     transition: all 0.4s var(--ease);
+    overflow: hidden;
   }
   .fab svg { width: 22px; height: 22px; flex-shrink: 0; }
   .fab-label {
@@ -118,599 +194,603 @@
     overflow: hidden;
     white-space: nowrap;
     opacity: 0;
-    transition: all 0.5s var(--ease);
+    transition: max-width 0.5s var(--ease), opacity 0.3s var(--ease) 0.1s;
   }
-  .fab:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 22px 50px -14px rgba(37, 211, 102, 0.65);
+  .fab:hover,
+  .fab:focus-visible {
+    transform: translateY(-3px);
+    background: var(--whatsapp-dark);
+    box-shadow: 0 24px 52px -16px rgba(37, 211, 102, 0.7);
   }
-  .fab:hover .fab-label {
+  .fab:hover .fab-label,
+  .fab:focus-visible .fab-label {
     max-width: 200px;
     opacity: 1;
-    margin-inline-start: 2px;
   }
 
-  /* ---------- هدر ---------- */
-  header {
-    padding: 140px 0 120px;
+  /* ============ Hero ============ */
+  .hero {
+    padding: clamp(120px, 18vw, 180px) 0 clamp(80px, 12vw, 120px);
     text-align: center;
-    animation: fadeUp 1.2s var(--ease) both;
   }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .badge {
+  .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: 9px;
-    padding: 10px 22px;
+    padding: 9px 20px;
     background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 999px;
-    font-size: 0.82rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: var(--r-pill);
+    font-size: 0.8rem;
     color: var(--text-soft);
-    margin-bottom: 38px;
+    margin-bottom: 34px;
     font-weight: 500;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--sh-sm);
+    animation: fadeUp 0.9s var(--ease) both;
   }
-
-  .badge .dot {
+  .hero-badge .dot {
     width: 7px;
     height: 7px;
-    background: #4ade80;
+    background: var(--success);
     border-radius: 50%;
-    box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.18);
+    box-shadow: 0 0 0 4px var(--success-soft);
     animation: pulse 2.6s ease-in-out infinite;
   }
-
   @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.18); }
-    50% { box-shadow: 0 0 0 9px rgba(74, 222, 128, 0.05); }
+    0%, 100% { box-shadow: 0 0 0 4px var(--success-soft); }
+    50% { box-shadow: 0 0 0 9px rgba(34, 197, 94, 0.05); }
   }
 
-  header h1 {
-    font-size: clamp(2.1rem, 5.8vw, 3.4rem);
+  .hero h1 {
+    font-size: clamp(2.1rem, 5.8vw, 3.6rem);
     font-weight: 700;
-    letter-spacing: -0.035em;
-    line-height: 1.35;
-    margin-bottom: 26px;
+    line-height: 1.28;
+    letter-spacing: -0.038em;
+    margin-bottom: 24px;
+    animation: fadeUp 1s var(--ease) 0.08s both;
   }
-  html[lang="fa"] header h1 { letter-spacing: -0.02em; }
+  html[lang="fa"] .hero h1 { letter-spacing: -0.02em; line-height: 1.45; }
 
-  header h1 .accent {
-    background: linear-gradient(135deg, #5b52d6, #7a6ee8 50%, #a794f5);
+  .hero h1 .accent {
+    background: linear-gradient(135deg, #5b52d6 0%, #7a6ee8 45%, #a794f5 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
-  header p.subtitle {
-    font-size: 1.08rem;
+  .hero-sub {
+    font-size: clamp(1rem, 1.35vw, 1.12rem);
     color: var(--text-soft);
-    max-width: 520px;
-    margin: 0 auto 48px;
+    max-width: 540px;
+    margin: 0 auto 44px;
     font-weight: 300;
-    line-height: 1.95;
+    line-height: 1.85;
+    animation: fadeUp 1s var(--ease) 0.16s both;
   }
 
-  /* ---------- دکمه‌ها ---------- */
-  .btns {
+  .hero-actions {
     display: flex;
-    gap: 11px;
+    gap: 12px;
     justify-content: center;
     flex-wrap: wrap;
+    animation: fadeUp 1s var(--ease) 0.24s both;
   }
 
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============ Buttons ============ */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 9px;
-    padding: 15px 32px;
-    border-radius: 999px;
+    padding: 15px 30px;
+    border-radius: var(--r-pill);
     font-size: 0.93rem;
     font-weight: 500;
+    line-height: 1;
     border: none;
     cursor: pointer;
     transition: all 0.4s var(--ease);
     white-space: nowrap;
-    line-height: 1;
+    text-align: center;
   }
-
   .btn svg { width: 17px; height: 17px; flex-shrink: 0; }
 
   .btn-primary {
     background: linear-gradient(135deg, #5b52d6, #7a6ee8);
     color: #fff;
-    box-shadow: 0 12px 26px -12px rgba(91, 82, 214, 0.55);
+    box-shadow: 0 12px 26px -12px var(--accent-glow);
   }
   .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 20px 40px -16px rgba(91, 82, 214, 0.65);
+    box-shadow: 0 22px 44px -14px var(--accent-glow);
   }
+  .btn-primary:active { transform: translateY(-1px); }
 
   .btn-outline {
     background: var(--surface);
     color: var(--text);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--sh-sm);
   }
   .btn-outline:hover {
     transform: translateY(-3px);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--sh-md);
     color: var(--accent);
   }
+  .btn-outline:active { transform: translateY(-1px); }
 
-  .btn:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
+  /* ============ Section Head ============ */
+  .section {
+    padding: var(--section-y) 0;
   }
-
-  /* ---------- بخش‌ها ---------- */
-  section { padding: 100px 0; }
-
   .section-head {
     text-align: center;
-    margin-bottom: 68px;
+    margin-bottom: clamp(48px, 7vw, 72px);
   }
-
-  .section-head .label {
-    font-size: 0.72rem;
+  .section-eyebrow {
+    display: block;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.28em;
     color: var(--accent);
     font-weight: 600;
     margin-bottom: 14px;
-    display: block;
   }
-  html[lang="fa"] .section-head .label { letter-spacing: 0.1em; }
+  html[lang="fa"] .section-eyebrow { letter-spacing: 0.12em; }
 
-  .section-head h2 {
-    font-size: clamp(1.5rem, 3.2vw, 2rem);
+  .section-title {
+    font-size: clamp(1.5rem, 3.2vw, 2.05rem);
     font-weight: 600;
-    letter-spacing: -0.025em;
+    line-height: 1.35;
+    letter-spacing: -0.028em;
   }
-  html[lang="fa"] .section-head h2 { letter-spacing: -0.01em; }
+  html[lang="fa"] .section-title { letter-spacing: -0.012em; }
 
-  /* ---------- خدمات ---------- */
+  /* ============ Services ============ */
   .services {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 16px;
   }
-
   .service {
     background: var(--surface);
     padding: 36px 30px;
-    border-radius: 30px;
+    border-radius: var(--r-lg);
     transition: all 0.5s var(--ease);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--sh-sm);
   }
-
   .service:hover {
     transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--sh-lg);
   }
-
-  .service .icon {
+  .service-icon {
     width: 54px;
     height: 54px;
-    border-radius: 999px;
+    border-radius: var(--r-pill);
     background: var(--accent-soft);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.45rem;
     margin-bottom: 24px;
-    transition: transform 0.5s var(--ease);
+    transition: transform 0.6s var(--ease-spring);
   }
-
-  .service:hover .icon {
-    transform: rotate(-8deg) scale(1.08);
+  .service:hover .service-icon {
+    transform: rotate(-8deg) scale(1.1);
   }
-
   .service h3 {
     font-size: 1.02rem;
     font-weight: 600;
     margin-bottom: 9px;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.012em;
   }
-
   .service p {
     font-size: 0.88rem;
     color: var(--text-soft);
-    line-height: 1.95;
+    line-height: 1.85;
   }
 
-  /* ---------- نمونه‌کارها ---------- */
+  /* ============ Portfolio ============ */
   .works {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 22px;
   }
-
   .work {
     background: var(--surface);
-    border-radius: 34px;
+    border-radius: var(--r-xl);
     overflow: hidden;
     transition: all 0.55s var(--ease);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--sh-sm);
+    display: flex;
+    flex-direction: column;
   }
-
   .work:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--sh-xl);
   }
-
   .work-image {
+    position: relative;
     aspect-ratio: 16 / 10;
     background: var(--accent-soft);
     overflow: hidden;
   }
-
   .work-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s var(--ease);
+    transition: transform 0.8s var(--ease);
   }
-
   .work:hover .work-image img {
     transform: scale(1.06);
   }
-
-  .work-body { padding: 28px; }
-
-  .work-body h3 {
-    font-size: 1.02rem;
-    font-weight: 600;
-    margin-bottom: 7px;
-    letter-spacing: -0.01em;
+  .work-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(28, 26, 23, 0.08) 100%);
+    pointer-events: none;
   }
-
-  .work-body p {
-    font-size: 0.86rem;
-    color: var(--text-soft);
-    line-height: 1.9;
-  }
-
+  .work-body { padding: 26px 26px 28px; }
   .work-tag {
     display: inline-block;
-    padding: 5px 14px;
+    padding: 4px 12px;
     background: var(--accent-soft);
-    border-radius: 999px;
-    font-size: 0.71rem;
+    border-radius: var(--r-pill);
+    font-size: 0.7rem;
     color: var(--accent);
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     font-weight: 600;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
+  }
+  .work h3 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: -0.012em;
+  }
+  .work p {
+    font-size: 0.86rem;
+    color: var(--text-soft);
+    line-height: 1.8;
   }
 
-  /* ---------- فرایند کار ---------- */
+  /* ============ Process ============ */
   .process {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
+    gap: 18px;
   }
-
   .step {
     background: var(--surface);
     padding: 36px 30px;
-    border-radius: 30px;
-    position: relative;
+    border-radius: var(--r-lg);
     transition: all 0.5s var(--ease);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--sh-sm);
   }
-
   .step:hover {
     transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--sh-lg);
   }
-
   .step-num {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 999px;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--r-pill);
     background: linear-gradient(135deg, #5b52d6, #7a6ee8);
     color: #fff;
     font-weight: 600;
     font-size: 1.05rem;
     margin-bottom: 22px;
-    box-shadow: 0 8px 20px -8px rgba(91, 82, 214, 0.5);
+    box-shadow: 0 10px 22px -10px var(--accent-glow);
   }
-
   .step h3 {
     font-size: 1.02rem;
     font-weight: 600;
     margin-bottom: 9px;
+    letter-spacing: -0.012em;
   }
-
   .step p {
     font-size: 0.88rem;
     color: var(--text-soft);
-    line-height: 1.95;
+    line-height: 1.85;
   }
 
-  /* ---------- تماس ---------- */
-  .contact-box {
-    background: var(--surface);
-    border-radius: 44px;
-    padding: 90px 40px;
-    text-align: center;
-    box-shadow: var(--shadow-md);
+  /* ============ Contact ============ */
+  .contact-card {
     position: relative;
+    background: var(--surface);
+    border-radius: clamp(28px, 4vw, 44px);
+    padding: clamp(56px, 8vw, 92px) clamp(26px, 5vw, 40px);
+    text-align: center;
+    box-shadow: var(--sh-md);
     overflow: hidden;
   }
-
-  .contact-box::before {
+  .contact-card::before {
     content: '';
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at 15% 15%, rgba(122, 110, 232, 0.07), transparent 40%),
-      radial-gradient(circle at 85% 85%, rgba(255, 178, 132, 0.07), transparent 40%);
+      radial-gradient(circle at 12% 12%, rgba(122, 110, 232, 0.08), transparent 42%),
+      radial-gradient(circle at 88% 88%, rgba(255, 168, 120, 0.08), transparent 42%);
     pointer-events: none;
   }
-
-  .contact-box > * { position: relative; }
-
-  .contact-box h2 {
+  .contact-card > * { position: relative; }
+  .contact-card h2 {
     font-size: clamp(1.7rem, 3.5vw, 2.2rem);
     font-weight: 600;
-    margin-bottom: 18px;
-    letter-spacing: -0.025em;
-    line-height: 1.4;
+    line-height: 1.35;
+    letter-spacing: -0.028em;
+    margin-bottom: 16px;
   }
-  html[lang="fa"] .contact-box h2 { letter-spacing: -0.01em; }
-
-  .contact-box p.lead {
+  html[lang="fa"] .contact-card h2 { letter-spacing: -0.012em; }
+  .contact-card .lead {
+    font-size: clamp(0.98rem, 1.2vw, 1.05rem);
     color: var(--text-soft);
-    margin-bottom: 42px;
     font-weight: 300;
     max-width: 460px;
-    margin-inline: auto;
-    font-size: 1.05rem;
-    line-height: 1.95;
+    margin: 0 auto 40px;
+    line-height: 1.85;
   }
-
-  .contact-box .btns { gap: 12px; }
-
+  .contact-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
   .contact-note {
-    margin-top: 34px;
+    margin-top: 32px;
     font-size: 0.83rem;
     color: var(--text-faint);
     font-weight: 400;
   }
 
-  /* ---------- فوتر ---------- */
-  footer {
+  /* ============ Footer ============ */
+  .footer {
     text-align: center;
-    padding: 60px 20px 100px;
+    padding: 52px 20px 108px;
     color: var(--text-faint);
-    font-size: 0.8rem;
-    margin-top: 30px;
+    font-size: 0.82rem;
     font-weight: 300;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.005em;
   }
+  .footer .heart { color: #f43f5e; }
 
-  /* ---------- موبایل ---------- */
-  @media (max-width: 600px) {
-    header { padding: 100px 0 80px; }
-    section { padding: 72px 0; }
-    .section-head { margin-bottom: 48px; }
-    .contact-box { padding: 64px 26px; border-radius: 34px; }
-    .btn { padding: 14px 24px; font-size: 0.9rem; }
-    .service { padding: 30px 24px; border-radius: 26px; }
-    .work { border-radius: 28px; }
-    .step { padding: 30px 24px; border-radius: 26px; }
-    .lang-toggle { top: 18px; right: 18px; padding: 9px 16px; }
-    .fab {
-      bottom: 20px;
-      right: 20px;
-      padding: 14px 18px;
-    }
+  /* ============ Responsive ============ */
+  @media (max-width: 640px) {
+    .hero { padding: 110px 0 72px; }
+    .service,
+    .step { padding: 30px 24px; border-radius: var(--r-md); }
+    .work { border-radius: var(--r-lg); }
+    .contact-card { padding: 60px 24px; }
+    .contact-actions { flex-direction: column; align-items: stretch; }
+    .contact-actions .btn { width: 100%; }
+
+    .brand { top: 16px; left: 16px; padding: 9px 16px; font-size: 0.78rem; }
+    .lang-toggle { top: 16px; right: 16px; padding: 9px 16px; }
+    .fab { bottom: 18px; right: 18px; padding: 14px 18px; }
     .fab-label { max-width: 0 !important; opacity: 0 !important; }
-    .contact-box .btns { flex-direction: column; align-items: stretch; }
-    .contact-box .btn { width: 100%; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 </style>
 </head>
 <body>
 
-<!-- Language toggle (همیشه بالا راست) -->
+<!-- Fixed brand & lang toggle -->
+<a href="#top" class="brand" aria-label="Ali Hatami — Home">Ali Hatami</a>
 <button class="lang-toggle" id="langBtn" aria-label="Switch language">FA</button>
 
-<!-- Floating WhatsApp button -->
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero-badge">
+        <span class="dot"></span>
+        <span data-fa="آماده همکاری" data-en="Available for work">Available for work</span>
+      </span>
+
+      <h1>
+        <span data-fa="سلام، من <span class='accent'>علی حاتمی</span> هستم" data-en="Hi, I'm <span class='accent'>Ali Hatami</span>">Hi, I'm <span class="accent">Ali Hatami</span></span>
+      </h1>
+
+      <p class="hero-sub"
+         data-fa="سایتت رو جوری می‌سازم که مشتری‌ها دوستش داشته باشن — سریع، تمیز و آماده فروش."
+         data-en="I build websites your customers will love — fast, clean, and ready to sell.">
+        I build websites your customers will love — fast, clean, and ready to sell.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#works" class="btn btn-primary" data-fa="مشاهده نمونه‌کارها" data-en="View Portfolio">View Portfolio</a>
+        <a href="#contact" class="btn btn-outline" data-fa="شروع همکاری" data-en="Start a Project">Start a Project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES ============ -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow" data-fa="خدمات" data-en="Services">Services</span>
+        <h2 class="section-title" data-fa="چه کارهایی انجام می‌دم" data-en="What I Do">What I Do</h2>
+      </div>
+      <div class="services">
+        <article class="service">
+          <div class="service-icon">🌐</div>
+          <h3 data-fa="سایت تک‌صفحه‌ای" data-en="Single-Page Website">Single-Page Website</h3>
+          <p data-fa="طراحی سریع، ریسپانسیو و مینیمال برای معرفی کسب‌وکار" data-en="Fast, responsive, and minimal design for business introduction">Fast, responsive, and minimal design for business introduction</p>
+        </article>
+        <article class="service">
+          <div class="service-icon">🏢</div>
+          <h3 data-fa="سایت شرکتی" data-en="Business Website">Business Website</h3>
+          <p data-fa="چندصفحه‌ای با صفحات درباره ما، خدمات و تماس" data-en="Multi-page site with About, Services, and Contact pages">Multi-page site with About, Services, and Contact pages</p>
+        </article>
+        <article class="service">
+          <div class="service-icon">🛒</div>
+          <h3 data-fa="فروشگاهی" data-en="E-commerce">E-commerce</h3>
+          <p data-fa="راه‌اندازی فروشگاه آنلاین با ووکامرس و درگاه پرداخت" data-en="Online store setup with WooCommerce and payment gateway">Online store setup with WooCommerce and payment gateway</p>
+        </article>
+        <article class="service">
+          <div class="service-icon">📄</div>
+          <h3 data-fa="بروشور و کاتالوگ" data-en="Brochure & Catalog">Brochure & Catalog</h3>
+          <p data-fa="طراحی جذاب برای ارائه محصولات و خدمات" data-en="Attractive design for showcasing products and services">Attractive design for showcasing products and services</p>
+        </article>
+        <article class="service">
+          <div class="service-icon">⚡</div>
+          <h3 data-fa="بهینه‌سازی سرعت" data-en="Speed Optimization">Speed Optimization</h3>
+          <p data-fa="افزایش سرعت لود و بهبود تجربه کاربری" data-en="Faster load times and improved user experience">Faster load times and improved user experience</p>
+        </article>
+        <article class="service">
+          <div class="service-icon">🔍</div>
+          <h3 data-fa="سئو پایه" data-en="Basic SEO">Basic SEO</h3>
+          <p data-fa="تنظیمات اولیه سئو برای دیده‌شدن در گوگل" data-en="Essential SEO setup to get found on Google">Essential SEO setup to get found on Google</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PORTFOLIO ============ -->
+  <section class="section" id="works">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow" data-fa="پورتفولیو" data-en="Portfolio">Portfolio</span>
+        <h2 class="section-title" data-fa="نمونه‌کارها" data-en="Selected Works">Selected Works</h2>
+      </div>
+      <div class="works">
+
+        <article class="work">
+          <div class="work-image">
+            <img src="images/work1.jpg" alt="Cafe Website" loading="lazy">
+          </div>
+          <div class="work-body">
+            <span class="work-tag" data-fa="وردپرس" data-en="WordPress">WordPress</span>
+            <h3 data-fa="سایت کافه" data-en="Cafe Website">Cafe Website</h3>
+            <p data-fa="طراحی تک‌صفحه‌ای با منو و گالری" data-en="Single-page design with menu and gallery">Single-page design with menu and gallery</p>
+          </div>
+        </article>
+
+        <article class="work">
+          <div class="work-image">
+            <img src="images/work2.jpg" alt="Clinic Landing Page" loading="lazy">
+          </div>
+          <div class="work-body">
+            <span class="work-tag" data-fa="المنتور" data-en="Elementor">Elementor</span>
+            <h3 data-fa="لندینگ‌پیج کلینیک" data-en="Clinic Landing Page">Clinic Landing Page</h3>
+            <p data-fa="طراحی با تمرکز روی نرخ تبدیل و تماس" data-en="Focused on conversion rate and call-to-action">Focused on conversion rate and call-to-action</p>
+          </div>
+        </article>
+
+        <article class="work">
+          <div class="work-image">
+            <img src="images/work3.jpg" alt="Digital Catalog" loading="lazy">
+          </div>
+          <div class="work-body">
+            <span class="work-tag" data-fa="فیگما" data-en="Figma">Figma</span>
+            <h3 data-fa="کاتالوگ دیجیتال" data-en="Digital Catalog">Digital Catalog</h3>
+            <p data-fa="بروشور آنلاین برای فروشگاه لوازم خانگی" data-en="Online brochure for a home appliance store">Online brochure for a home appliance store</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow" data-fa="فرایند کار" data-en="Process">Process</span>
+        <h2 class="section-title" data-fa="چطور با هم کار می‌کنیم" data-en="How We'll Work Together">How We'll Work Together</h2>
+      </div>
+      <div class="process">
+        <article class="step">
+          <div class="step-num">۱</div>
+          <h3 data-fa="گفتگو" data-en="Talk">Talk</h3>
+          <p data-fa="یه پیام بدی، نیازت رو می‌شنوم و راهنمایی‌ات می‌کنم — رایگان و بدون تعهد." data-en="Send a message. I'll listen and guide you — free, with no obligation.">Send a message. I'll listen and guide you — free, with no obligation.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">۲</div>
+          <h3 data-fa="طراحی و ساخت" data-en="Design & Build">Design & Build</h3>
+          <p data-fa="طرح رو می‌سازم، نظرت رو می‌گیرم و تا رضایت کامل ادامه می‌دیم." data-en="I design and build it, share previews, and refine until you're happy.">I design and build it, share previews, and refine until you're happy.</p>
+        </article>
+        <article class="step">
+          <div class="step-num">۳</div>
+          <h3 data-fa="تحویل و پشتیبانی" data-en="Launch & Support">Launch & Support</h3>
+          <p data-fa="سایتت آنلاین می‌شه و بعد از تحویل هم کنارت می‌مونم." data-en="Your site goes live — and I stay by your side after launch.">Your site goes live — and I stay by your side after launch.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-card">
+        <h2 data-fa="آماده‌ای سایتت رو شروع کنیم؟" data-en="Ready to start your website?">Ready to start your website?</h2>
+        <p class="lead"
+           data-fa="فقط یه پیام فاصله داری. همین حالا شروع کنیم — من سریع جواب می‌دم."
+           data-en="You're just one message away. Let's start right now — I reply fast.">
+          You're just one message away. Let's start right now — I reply fast.
+        </p>
+
+        <div class="contact-actions">
+
+          <a href="https://wa.me/989351914839" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span data-fa="سفارش در واتساپ" data-en="Order on WhatsApp">Order on WhatsApp</span>
+          </a>
+
+          <a href="https://t.me/Aliatamii" class="btn btn-outline">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            <span data-fa="پیام در تلگرام" data-en="Message on Telegram">Message on Telegram</span>
+          </a>
+
+          <a href="tel:+989351914839" class="btn btn-outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span data-fa="تماس مستقیم" data-en="Direct Call">Direct Call</span>
+          </a>
+
+          <a href="mailto:ahatamiali220@gmail.com" class="btn btn-outline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/></svg>
+            <span data-fa="ارسال ایمیل" data-en="Send Email">Send Email</span>
+          </a>
+
+        </div>
+
+        <p class="contact-note">
+          <span data-fa="معمولاً در کمتر از یک ساعت پاسخ می‌دم ✨" data-en="I usually reply within an hour ✨">I usually reply within an hour ✨</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FAB ============ -->
 <a href="https://wa.me/989351914839" class="fab" aria-label="Order on WhatsApp">
-  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   <span class="fab-label" data-fa="سفارش در واتساپ" data-en="Order on WhatsApp">Order on WhatsApp</span>
 </a>
 
-<!-- Header -->
-<header>
-  <div class="container">
-    <span class="badge">
-      <span class="dot"></span>
-      <span data-fa="آماده همکاری" data-en="Available for work">Available for work</span>
-    </span>
-    <h1>
-      <span data-fa="سلام، من <span class='accent'>علی حاتمی</span> هستم" data-en="Hi, I'm <span class='accent'>Ali Hatami</span>">Hi, I'm <span class="accent">Ali Hatami</span></span>
-    </h1>
-    <p class="subtitle" data-fa="سایتت رو جوری می‌سازم که مشتری‌ها دوستش داشته باشن — سریع، تمیز و آماده فروش" data-en="I build websites your customers will love — fast, clean, and ready to sell">
-      I build websites your customers will love — fast, clean, and ready to sell
-    </p>
-    <div class="btns">
-      <a href="#works" class="btn btn-primary" data-fa="مشاهده نمونه‌کارها" data-en="View Portfolio">View Portfolio</a>
-      <a href="#contact" class="btn btn-outline" data-fa="تماس با من" data-en="Contact Me">Contact Me</a>
-    </div>
-  </div>
-</header>
-
-<!-- Services -->
-<section id="services">
-  <div class="container">
-    <div class="section-head">
-      <span class="label" data-fa="خدمات" data-en="Services">Services</span>
-      <h2 data-fa="چه کارهایی انجام می‌دم" data-en="What I Do">What I Do</h2>
-    </div>
-    <div class="services">
-      <div class="service">
-        <div class="icon">🌐</div>
-        <h3 data-fa="سایت تک‌صفحه‌ای" data-en="Single-Page Website">Single-Page Website</h3>
-        <p data-fa="طراحی سریع، ریسپانسیو و مینیمال برای معرفی کسب‌وکار" data-en="Fast, responsive, and minimal design for business introduction">Fast, responsive, and minimal design for business introduction</p>
-      </div>
-      <div class="service">
-        <div class="icon">🏢</div>
-        <h3 data-fa="سایت شرکتی" data-en="Business Website">Business Website</h3>
-        <p data-fa="چندصفحه‌ای با صفحات درباره ما، خدمات و تماس" data-en="Multi-page site with About, Services, and Contact pages">Multi-page site with About, Services, and Contact pages</p>
-      </div>
-      <div class="service">
-        <div class="icon">🛒</div>
-        <h3 data-fa="فروشگاهی" data-en="E-commerce">E-commerce</h3>
-        <p data-fa="راه‌اندازی فروشگاه آنلاین با ووکامرس و درگاه پرداخت" data-en="Online store setup with WooCommerce and payment gateway">Online store setup with WooCommerce and payment gateway</p>
-      </div>
-      <div class="service">
-        <div class="icon">📄</div>
-        <h3 data-fa="بروشور و کاتالوگ" data-en="Brochure & Catalog">Brochure & Catalog</h3>
-        <p data-fa="طراحی جذاب برای ارائه محصولات و خدمات" data-en="Attractive design for showcasing products and services">Attractive design for showcasing products and services</p>
-      </div>
-      <div class="service">
-        <div class="icon">⚡</div>
-        <h3 data-fa="بهینه‌سازی سرعت" data-en="Speed Optimization">Speed Optimization</h3>
-        <p data-fa="افزایش سرعت لود و بهبود تجربه کاربری" data-en="Faster load times and improved user experience">Faster load times and improved user experience</p>
-      </div>
-      <div class="service">
-        <div class="icon">🔍</div>
-        <h3 data-fa="سئو پایه" data-en="Basic SEO">Basic SEO</h3>
-        <p data-fa="تنظیمات اولیه سئو برای دیده‌شدن در گوگل" data-en="Essential SEO setup to get found on Google">Essential SEO setup to get found on Google</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Portfolio -->
-<section id="works">
-  <div class="container">
-    <div class="section-head">
-      <span class="label" data-fa="پورتفولیو" data-en="Portfolio">Portfolio</span>
-      <h2 data-fa="نمونه‌کارها" data-en="Selected Works">Selected Works</h2>
-    </div>
-    <div class="works">
-
-      <div class="work">
-        <div class="work-image">
-          <img src="images/work1.jpg" alt="Cafe Website">
-        </div>
-        <div class="work-body">
-          <span class="work-tag" data-fa="وردپرس" data-en="WordPress">WordPress</span>
-          <h3 data-fa="سایت کافه" data-en="Cafe Website">Cafe Website</h3>
-          <p data-fa="طراحی تک‌صفحه‌ای با منو و گالری" data-en="Single-page design with menu and gallery">Single-page design with menu and gallery</p>
-        </div>
-      </div>
-
-      <div class="work">
-        <div class="work-image">
-          <img src="images/work2.jpg" alt="Clinic Landing Page">
-        </div>
-        <div class="work-body">
-          <span class="work-tag" data-fa="المنتور" data-en="Elementor">Elementor</span>
-          <h3 data-fa="لندینگ‌پیج کلینیک" data-en="Clinic Landing Page">Clinic Landing Page</h3>
-          <p data-fa="طراحی با تمرکز روی نرخ تبدیل و تماس" data-en="Focused on conversion rate and call-to-action">Focused on conversion rate and call-to-action</p>
-        </div>
-      </div>
-
-      <div class="work">
-        <div class="work-image">
-          <img src="images/work3.jpg" alt="Digital Catalog">
-        </div>
-        <div class="work-body">
-          <span class="work-tag" data-fa="فیگما" data-en="Figma">Figma</span>
-          <h3 data-fa="کاتالوگ دیجیتال" data-en="Digital Catalog">Digital Catalog</h3>
-          <p data-fa="بروشور آنلاین برای فروشگاه لوازم خانگی" data-en="Online brochure for a home appliance store">Online brochure for a home appliance store</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Process -->
-<section id="process">
-  <div class="container">
-    <div class="section-head">
-      <span class="label" data-fa="فرایند کار" data-en="Process">Process</span>
-      <h2 data-fa="چطور با هم کار می‌کنیم" data-en="How We'll Work Together">How We'll Work Together</h2>
-    </div>
-    <div class="process">
-      <div class="step">
-        <div class="step-num">۱</div>
-        <h3 data-fa="گفتگو" data-en="Talk">Talk</h3>
-        <p data-fa="یه پیام بدی، نیازت رو می‌شنوم و راهنمایی‌ات می‌کنم. رایگان و بدون تعهد." data-en="Send a message. I'll listen and guide you — free, with no obligation.">Send a message. I'll listen and guide you — free, with no obligation.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">۲</div>
-        <h3 data-fa="طراحی و ساخت" data-en="Design & Build">Design & Build</h3>
-        <p data-fa="طرح رو می‌سازم، نظرت رو می‌گیرم و تا رضایت کامل ادامه می‌دیم." data-en="I design and build it, share previews, and refine until you're happy.">I design and build it, share previews, and refine until you're happy.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">۳</div>
-        <h3 data-fa="تحویل و پشتیبانی" data-en="Launch & Support">Launch & Support</h3>
-        <p data-fa="سایتت آنلاین می‌شه و بعد از تحویل هم کنارت می‌مونم." data-en="Your site goes live — and I stay by your side after launch.">Your site goes live — and I stay by your side after launch.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Contact -->
-<section id="contact">
-  <div class="container">
-    <div class="contact-box">
-      <h2 data-fa="آماده‌ای سایتت رو شروع کنیم؟" data-en="Ready to start your website?">Ready to start your website?</h2>
-      <p class="lead" data-fa="فقط یه پیام فاصله داری. همین حالا شروع کنیم — من سریع جواب می‌دم." data-en="You're just one message away. Let's start right now — I reply fast.">
-        You're just one message away. Let's start right now — I reply fast.
-      </p>
-      <div class="btns">
-
-        <a href="https://wa.me/989351914839" class="btn btn-primary">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          <span data-fa="سفارش در واتساپ" data-en="Order on WhatsApp">Order on WhatsApp</span>
-        </a>
-
-        <a href="https://t.me/Aliatamii" class="btn btn-outline">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          <span data-fa="تلگرام" data-en="Telegram">Telegram</span>
-        </a>
-
-        <a href="tel:+989351914839" class="btn btn-outline">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span data-fa="تماس مستقیم" data-en="Direct Call">Direct Call</span>
-        </a>
-
-        <a href="mailto:ahatamiali220@gmail.com" class="btn btn-outline">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/></svg>
-          <span data-fa="ایمیل" data-en="Email">Email</span>
-        </a>
-
-      </div>
-      <p class="contact-note">
-        <span data-fa="معمولاً در کمتر از یک ساعت پاسخ می‌دم ✨" data-en="I usually reply within an hour ✨">I usually reply within an hour ✨</span>
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer>
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
   <div class="container">
     <span data-fa="ساخته شده با ❤ — علی حاتمی © ۱۴۰۵" data-en="Made with ❤ — Ali Hatami © 2026">Made with ❤ — Ali Hatami © 2026</span>
   </div>
@@ -720,8 +800,6 @@
   (function () {
     const html = document.documentElement;
     const btn = document.getElementById('langBtn');
-
-    // Default language: English
     const saved = localStorage.getItem('ali-site-lang') || 'en';
 
     function setLang(lang) {
@@ -729,15 +807,9 @@
         el.innerHTML = el.getAttribute('data-' + lang);
       });
 
-      if (lang === 'fa') {
-        html.setAttribute('lang', 'fa');
-        html.setAttribute('dir', 'rtl');
-        btn.textContent = 'EN';
-      } else {
-        html.setAttribute('lang', 'en');
-        html.setAttribute('dir', 'ltr');
-        btn.textContent = 'FA';
-      }
+      html.setAttribute('lang', lang);
+      html.setAttribute('dir', lang === 'fa' ? 'rtl' : 'ltr');
+      btn.textContent = lang === 'fa' ? 'EN' : 'FA';
       localStorage.setItem('ali-site-lang', lang);
     }
 
